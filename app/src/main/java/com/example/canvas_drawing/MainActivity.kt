@@ -4,9 +4,11 @@ import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
 
@@ -19,9 +21,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val linerLayoutPainrColors = findViewById<LinearLayout>(R.id.ll_paint_colors)
+        val linerLayoutPaintColors = findViewById<LinearLayout>(R.id.ll_paint_colors)
 
-        mImageButtonCurrentPaint = linerLayoutPainrColors[2] as ImageButton
+        mImageButtonCurrentPaint = linerLayoutPaintColors[3] as ImageButton
 
         mImageButtonCurrentPaint!!.setImageDrawable(
 
@@ -81,12 +83,48 @@ class MainActivity : AppCompatActivity() {
 
         largeBtn.setOnClickListener {
 
-            Log.i("Small button clicked", " Failded")
+            Log.i("Small button clicked", " Failed")
 
             drawingView?.setBrushSize(30.toFloat())
             brushDialog.dismiss()
         }
         brushDialog.show()
 
+    }
+
+
+    fun paintClicked(view: View) {
+
+
+        if(view !== mImageButtonCurrentPaint){
+
+
+            val imageButton = view as ImageButton;
+            val colorTag  = imageButton.tag.toString();
+            drawingView?.setColor(colorTag);
+
+
+            imageButton.setImageDrawable(
+
+                ContextCompat.getDrawable(
+                    this, R.drawable.pallet_selected
+                )
+
+            )
+
+
+            mImageButtonCurrentPaint!!.setImageDrawable(
+
+                ContextCompat.getDrawable(
+                    this, R.drawable.pallet_normal
+                )
+
+            )
+
+
+            mImageButtonCurrentPaint = view;
+//            Toast.makeText(this, "Clicked", Toast.LENGTH_LONG).show();
+
+        }
     }
 }
