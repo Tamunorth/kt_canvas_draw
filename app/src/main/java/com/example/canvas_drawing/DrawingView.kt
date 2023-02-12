@@ -19,10 +19,33 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
     private var color: Int = Color.BLACK
     private var mCanvas: Canvas? = null
     private val mPaths = ArrayList<CustomPath>()
+    private val mUndoPaths = ArrayList<CustomPath>()
 
 
     init {
         setupDrawing()
+    }
+
+
+    fun onClickUndo() {
+
+        if (mPaths.size > 0) {
+            mUndoPaths.add(mPaths.removeAt(mPaths.size - 1))
+
+            ///Basuically calls setState
+            invalidate();
+        }
+    }
+
+    fun onClickRedo() {
+
+        if (mPaths.size > 0 && mUndoPaths.size > 0) {
+
+            mPaths.add(mUndoPaths.removeAt(mUndoPaths.size - 1))
+
+            ///Basuically calls setState
+            invalidate();
+        }
     }
 
 
@@ -33,10 +56,7 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
 
         mDrawPaint!!.color = color
 
-
         mDrawPaint!!.style = Paint.Style.STROKE
-
-
         mDrawPaint!!.strokeJoin = Paint.Join.ROUND
         mDrawPaint!!.strokeCap = Paint.Cap.ROUND
         mCanvasPaint = Paint(Paint.DITHER_FLAG);
@@ -89,9 +109,6 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         val touchX = event?.x;
         val touchY = event?.y;
-
-
-
         when (event?.action) {
             MotionEvent.ACTION_DOWN -> {
 
