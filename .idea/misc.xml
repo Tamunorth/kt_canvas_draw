@@ -11,7 +11,10 @@
         <entry key="app/src/main/res/drawable/pallet_selected.xml" value="0.1235" />
         <entry key="app/src/main/res/drawable/small.xml" value="0.1235" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.15141143798828127" />
+        <entry key="app/src/main/res/layout/custom_progress_dialog.xml" value="0.1" />
         <entry key="app/src/main/res/layout/dialog_brush_size.xml" value="0.44480743408203127" />
+        <entry key="app/src/main/res/layout/dialog_custom_progress.xml" value="0.1578125" />
+        <entry key="app/src/main/res/xml/path.xml" value="0.15885416666666666" />
       </map>
     </option>
   </component>
